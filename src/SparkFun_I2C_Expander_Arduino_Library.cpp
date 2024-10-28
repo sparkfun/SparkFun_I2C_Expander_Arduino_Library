@@ -108,8 +108,6 @@ bool SFE_PCA95XX::begin(byte deviceAddress, TwoWire &wirePort, byte numberOfGpio
     if (numberOfGpio != 255)
         _numberOfGpio = numberOfGpio;
 
-    Serial.printf("device address: 0x%02X\r\n", _deviceAddress);
-
     return (isConnected());
 }
 
