@@ -183,7 +183,7 @@ uint8_t SFE_PCA95XX::readReg()
     {
         return err;
     }
-    return (inputRegister & (0x0f));
+    return (inputRegister);
 }
 
 uint8_t SFE_PCA95XX::read(uint8_t pin)
