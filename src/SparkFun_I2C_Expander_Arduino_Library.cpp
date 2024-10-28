@@ -173,7 +173,7 @@ PCA95XX_error_t SFE_PCA95XX::digitalWrite(uint8_t pin, uint8_t value)
     return write(pin, value);
 }
 
-uint8_t SFE_PCA95XX::readReg()
+uint8_t SFE_PCA95XX::getInputRegister()
 {
     PCA95XX_error_t err;
     uint8_t inputRegister = 0;

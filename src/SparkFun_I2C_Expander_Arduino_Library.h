@@ -143,10 +143,10 @@ class SFE_PCA95XX
     PCA95XX_error_t digitalWrite(uint8_t pin, uint8_t value);
     PCA95XX_error_t write(uint8_t pin, uint8_t value);
 
-    // readReg can be used to read the whole input register (4 bits)
-    uint8_t readReg();
+    // getInputRegister can be used to read the whole input register
+    uint8_t getInputRegister();
 
-    // digitalRead and read can be used to read a pin (0-3)
+    // digitalRead and read can be used to read a pin
     uint8_t digitalRead(uint8_t pin);
     uint8_t read(uint8_t pin);
 
