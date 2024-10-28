@@ -1,0 +1,33 @@
+#######################################
+# Syntax Coloring Map 
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+PCA9534	KEYWORD1
+PCA9536	KEYWORD1
+PCA9537	KEYWORD1
+PCA9554	KEYWORD1
+PCA9556	KEYWORD1
+PCA9557	KEYWORD1
+
+SparkFun_I2C_Expander_Arduino_Library	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+setDebugStream	KEYWORD2
+invert	KEYWORD2
+revert	KEYWORD2
+readReg	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+PCA95XX_INVERT	LITERAL1
+PCA95XX_RETAIN	LITERAL1
+PCA95XX_SUCCESS	LITERAL1
