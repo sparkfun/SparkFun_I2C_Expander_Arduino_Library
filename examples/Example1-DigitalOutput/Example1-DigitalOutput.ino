@@ -7,7 +7,9 @@
   License: This code is public domain but you buy me a beer if you use this and we meet someday (Beerware license).
   
   Feel like supporting our work? Buy a board from SparkFun!
-  https://www.sparkfun.com/products/14733
+  https://www.sparkfun.com/products/17047 - Qwiic GPIO
+  https://www.sparkfun.com/products/26784 - Qwiic Power Switch
+  https://www.sparkfun.com/products/26851 - Qwiic Directional Pad
   
   This example demonstrates how to use pinMode and digitalWrite/write to set output values of the PCA95xx
 
