@@ -62,36 +62,43 @@ SFE_PCA95XX::SFE_PCA95XX(sfe_pca95xx_devices_e device)
     default: // Default is the PCA9554
         _deviceAddress = PCA9554_ADDRESS_20;
         _numberOfGpio = 8;
+        _deviceType = PCA95XX_PCA9554;
         break;
 
     case PCA95XX_PCA9534:
         _deviceAddress = PCA9534_ADDRESS_20;
         _numberOfGpio = 8;
+        _deviceType = PCA95XX_PCA9534;
         break;
 
     case PCA95XX_PCA9536:
         _deviceAddress = PCA9536_ADDRESS;
         _numberOfGpio = 4;
+        _deviceType = PCA95XX_PCA9536;
         break;
 
     case PCA95XX_PCA9537:
         _deviceAddress = PCA9537_ADDRESS;
         _numberOfGpio = 4;
+        _deviceType = PCA95XX_PCA9537;
         break;
 
     case PCA95XX_PCA9554:
         _deviceAddress = PCA9554_ADDRESS_20;
         _numberOfGpio = 8;
+        _deviceType = PCA95XX_PCA9554;
         break;
 
     case PCA95XX_PCA9556:
         _deviceAddress = PCA9556_ADDRESS_18;
         _numberOfGpio = 8;
+        _deviceType = PCA95XX_PCA9556;
         break;
 
     case PCA95XX_PCA9557:
         _deviceAddress = PCA9557_ADDRESS_18;
         _numberOfGpio = 8;
+        _deviceType = PCA95XX_PCA9557;
         break;
     }
 }
@@ -171,7 +178,7 @@ PCA95XX_error_t SFE_PCA95XX::digitalWrite(uint8_t pin, uint8_t value)
     return write(pin, value);
 }
 
-//Safe reading of input register
+// Safe reading of input register
 PCA95XX_error_t SFE_PCA95XX::getInputRegister(uint8_t *destination)
 {
     PCA95XX_error_t err;
@@ -185,7 +192,7 @@ PCA95XX_error_t SFE_PCA95XX::getInputRegister(uint8_t *destination)
     return (err);
 }
 
-//Unsafe overload
+// Unsafe overload
 uint8_t SFE_PCA95XX::getInputRegister()
 {
     uint8_t val;
@@ -194,7 +201,7 @@ uint8_t SFE_PCA95XX::getInputRegister()
     return 0; // Unsafe
 }
 
-//Safe reading of a pin
+// Safe reading of a pin
 PCA95XX_error_t SFE_PCA95XX::read(uint8_t *destination, uint8_t pin)
 {
     PCA95XX_error_t err;
@@ -211,7 +218,7 @@ PCA95XX_error_t SFE_PCA95XX::read(uint8_t *destination, uint8_t pin)
     return (err);
 }
 
-//Unsafe overload
+// Unsafe overload
 uint8_t SFE_PCA95XX::read(uint8_t pin)
 {
     uint8_t val;
@@ -220,13 +227,13 @@ uint8_t SFE_PCA95XX::read(uint8_t pin)
     return 0; // Unsafe
 }
 
-//Safe reading of a pin
+// Safe reading of a pin
 PCA95XX_error_t SFE_PCA95XX::digitalRead(uint8_t *destination, uint8_t pin)
 {
     return (read(destination, pin));
 }
 
-//Unsafe overload
+// Unsafe overload
 uint8_t SFE_PCA95XX::digitalRead(uint8_t pin)
 {
     uint8_t val;
@@ -313,7 +320,7 @@ PCA95XX_error_t SFE_PCA95XX::readI2CRegister(uint8_t *dest, PCA95XX_REGISTER_t r
     PCA95XX_error_t result = readI2CBuffer(dest, registerAddress, 1);
 
     // Interrupt Errata: User must change command byte to something besides 00h after a Read operation
-    if (registerAddress == PCA95XX_REGISTER_INPUT_PORT)
+    if (_deviceType == PCA95XX_PCA9554 && registerAddress == PCA95XX_REGISTER_INPUT_PORT)
     {
         // If we've just read the INPUT Port register, we must change command byte
         writeI2CBuffer(0, PCA95XX_REGISTER_OUTPUT_PORT, 0); // Write the command register, but no data
@@ -326,7 +333,7 @@ PCA95XX_error_t SFE_PCA95XX::writeI2CRegister(uint8_t data, PCA95XX_REGISTER_t r
     PCA95XX_error_t result = writeI2CBuffer(&data, registerAddress, 1);
 
     // Interrupt Errata: User must change command byte to something besides 00h after a Read operation
-    if (registerAddress == PCA95XX_REGISTER_INPUT_PORT)
+    if (_deviceType == PCA95XX_PCA9554 && registerAddress == PCA95XX_REGISTER_INPUT_PORT)
     {
         // If we've just read the INPUT Port register, we must change command byte
         writeI2CBuffer(0, PCA95XX_REGISTER_OUTPUT_PORT, 0); // Write the command register, but no data

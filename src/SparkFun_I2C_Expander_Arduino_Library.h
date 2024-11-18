@@ -162,6 +162,7 @@ class SFE_PCA95XX
     TwoWire *_i2cPort; // The generic connection to user's chosen I2C hardware
     Stream *_debugPort;
     PCA95XX_Address_t _deviceAddress;
+    sfe_pca95xx_devices_e _deviceType;
     byte _numberOfGpio;
 
     // I2C Read/Write
