@@ -128,7 +128,7 @@ PCA95XX_error_t SFE_PCA95XX::pinMode(uint8_t pin, uint8_t mode)
     PCA95XX_error_t err;
     uint8_t cfgRegister = 0;
 
-    if (pin > _numberOfGpio)
+    if (pin >= _numberOfGpio)
         return PCA95XX_ERROR_UNDEFINED;
 
     err = readI2CRegister(&cfgRegister, PCA95XX_REGISTER_CONFIGURATION);
@@ -149,7 +149,7 @@ PCA95XX_error_t SFE_PCA95XX::write(uint8_t pin, uint8_t value)
     PCA95XX_error_t err;
     uint8_t outputRegister = 0;
 
-    if (pin > _numberOfGpio)
+    if (pin >= _numberOfGpio)
         return PCA95XX_ERROR_UNDEFINED;
 
     err = readI2CRegister(&outputRegister, PCA95XX_REGISTER_OUTPUT_PORT);
@@ -189,7 +189,7 @@ uint8_t SFE_PCA95XX::read(uint8_t pin)
     PCA95XX_error_t err;
     uint8_t inputRegister = 0;
 
-    if (pin > _numberOfGpio)
+    if (pin >= _numberOfGpio)
         return PCA95XX_ERROR_UNDEFINED;
 
     err = readI2CRegister(&inputRegister, PCA95XX_REGISTER_INPUT_PORT);
@@ -210,7 +210,7 @@ PCA95XX_error_t SFE_PCA95XX::invert(uint8_t pin, PCA95XX_invert_t inversion)
     PCA95XX_error_t err;
     uint8_t invertRegister = 0;
 
-    if (pin > _numberOfGpio)
+    if (pin >= _numberOfGpio)
         return PCA95XX_ERROR_UNDEFINED;
 
     err = readI2CRegister(&invertRegister, PCA95XX_REGISTER_POLARITY_INVERSION);
