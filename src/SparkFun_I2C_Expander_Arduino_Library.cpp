@@ -171,20 +171,31 @@ PCA95XX_error_t SFE_PCA95XX::digitalWrite(uint8_t pin, uint8_t value)
     return write(pin, value);
 }
 
-uint8_t SFE_PCA95XX::getInputRegister()
+//Safe reading of input register
+PCA95XX_error_t SFE_PCA95XX::getInputRegister(uint8_t *destination)
 {
     PCA95XX_error_t err;
     uint8_t inputRegister = 0;
 
     err = readI2CRegister(&inputRegister, PCA95XX_REGISTER_INPUT_PORT);
     if (err != PCA95XX_ERROR_SUCCESS)
-    {
         return err;
-    }
-    return (inputRegister);
+
+    *destination = inputRegister;
+    return (err);
 }
 
-uint8_t SFE_PCA95XX::read(uint8_t pin)
+//Unsafe overload
+uint8_t SFE_PCA95XX::getInputRegister()
+{
+    uint8_t val;
+    if (getInputRegister(&val) == PCA95XX_ERROR_SUCCESS)
+        return val;
+    return 0; // Unsafe
+}
+
+//Safe reading of a pin
+PCA95XX_error_t SFE_PCA95XX::read(uint8_t *destination, uint8_t pin)
 {
     PCA95XX_error_t err;
     uint8_t inputRegister = 0;
@@ -194,15 +205,34 @@ uint8_t SFE_PCA95XX::read(uint8_t pin)
 
     err = readI2CRegister(&inputRegister, PCA95XX_REGISTER_INPUT_PORT);
     if (err != PCA95XX_ERROR_SUCCESS)
-    {
         return err;
-    }
-    return (inputRegister & (1 << pin)) >> pin;
+
+    *destination = (inputRegister & (1 << pin)) >> pin;
+    return (err);
 }
 
+//Unsafe overload
+uint8_t SFE_PCA95XX::read(uint8_t pin)
+{
+    uint8_t val;
+    if (read(&val, pin) == PCA95XX_ERROR_SUCCESS)
+        return val;
+    return 0; // Unsafe
+}
+
+//Safe reading of a pin
+PCA95XX_error_t SFE_PCA95XX::digitalRead(uint8_t *destination, uint8_t pin)
+{
+    return (read(destination, pin));
+}
+
+//Unsafe overload
 uint8_t SFE_PCA95XX::digitalRead(uint8_t pin)
 {
-    return read(pin);
+    uint8_t val;
+    if (digitalRead(&val, pin) == PCA95XX_ERROR_SUCCESS)
+        return val;
+    return 0; // Unsafe
 }
 
 PCA95XX_error_t SFE_PCA95XX::invert(uint8_t pin, PCA95XX_invert_t inversion)

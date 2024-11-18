@@ -144,11 +144,15 @@ class SFE_PCA95XX
     PCA95XX_error_t write(uint8_t pin, uint8_t value);
 
     // getInputRegister can be used to read the whole input register
-    uint8_t getInputRegister();
+    PCA95XX_error_t getInputRegister(uint8_t *destination); //Returns error if problem
+    uint8_t getInputRegister(); //May return erroneous data if read fails
 
-    // digitalRead and read can be used to read a pin
-    uint8_t digitalRead(uint8_t pin);
-    uint8_t read(uint8_t pin);
+    // read and digitalRead can be used to read a pin
+    PCA95XX_error_t read(uint8_t *destination, uint8_t pin);
+    uint8_t read(uint8_t pin); //May return erroneous data if read fails
+
+    PCA95XX_error_t digitalRead(uint8_t *destination, uint8_t pin);
+    uint8_t digitalRead(uint8_t pin); //May return erroneous data if read fails
 
     // invert and revert can be used to invert (or not) the I/O logic during a read
     PCA95XX_error_t invert(uint8_t pin, PCA95XX_invert_t inversion = PCA95XX_INVERT);
