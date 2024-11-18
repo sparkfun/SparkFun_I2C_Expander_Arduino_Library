@@ -280,10 +280,26 @@ PCA95XX_error_t SFE_PCA95XX::writeI2CBuffer(uint8_t *src, PCA95XX_REGISTER_t sta
 
 PCA95XX_error_t SFE_PCA95XX::readI2CRegister(uint8_t *dest, PCA95XX_REGISTER_t registerAddress)
 {
-    return readI2CBuffer(dest, registerAddress, 1);
+    PCA95XX_error_t result = readI2CBuffer(dest, registerAddress, 1);
+
+    // Interrupt Errata: User must change command byte to something besides 00h after a Read operation
+    if (registerAddress == PCA95XX_REGISTER_INPUT_PORT)
+    {
+        // If we've just read the INPUT Port register, we must change command byte
+        writeI2CBuffer(0, PCA95XX_REGISTER_OUTPUT_PORT, 0); // Write the command register, but no data
+    }
+    return result;
 }
 
 PCA95XX_error_t SFE_PCA95XX::writeI2CRegister(uint8_t data, PCA95XX_REGISTER_t registerAddress)
 {
-    return writeI2CBuffer(&data, registerAddress, 1);
+    PCA95XX_error_t result = writeI2CBuffer(&data, registerAddress, 1);
+
+    // Interrupt Errata: User must change command byte to something besides 00h after a Read operation
+    if (registerAddress == PCA95XX_REGISTER_INPUT_PORT)
+    {
+        // If we've just read the INPUT Port register, we must change command byte
+        writeI2CBuffer(0, PCA95XX_REGISTER_OUTPUT_PORT, 0); // Write the command register, but no data
+    }
+    return result;
 }
