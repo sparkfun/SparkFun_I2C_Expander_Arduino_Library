@@ -7,12 +7,14 @@ SparkFun I2C Expander Library
    <td><a href="https://www.sparkfun.com/products/17047"><img src="https://cdn.sparkfun.com/r/455-455/assets/parts/1/5/9/9/3/17047-SparkFun_Qwiic_GPIO-01.jpg"></a></td>
     <td><a href="https://www.sparkfun.com/products/14733"><img src="https://cdn.sparkfun.com/r/455-455/assets/parts/1/2/9/6/0/14733-RGB_Sensor__Qwiic__-_BH1749NUC-01.jpg"></a></td>
     <td><a href="https://www.sparkfun.com/products/26851"><img src="https://cdn.sparkfun.com/r/455-455/assets/parts/2/7/9/6/9/26851-Qwiic-Directional-Pad-Feature.jpg"></a></td>
+    <td><a href="https://www.sparkfun.com/sparkfun-qwiic-navigation-switch.html"><img src="https://www.sparkfun.com/media/catalog/product/cache/a793f13fd3d678cea13d28206895ba0c/p/r/prt-27576-qwiic-navigation-switch-feature.jpg" width="455px"></a></td>
   </tr>
   <tr align="center">
-    <td><a href="https://www.sparkfun.com/products/26784">SparkFun Qwiic Power Switch<br />(PRT-26784)</a></td>
-    <td><a href="https://www.sparkfun.com/products/17047">SparkFun Qwiic GPIO<br />(DEV-17047)</a></td>
-    <td><a href="https://www.sparkfun.com/products/14733">SparkFun RGB Sensor - BH1749NUC<br />(SPX-14733)</a></td>
-    <td><a href="https://www.sparkfun.com/products/26851">SparkFun Qwiic Directional Pad<br />(PRT-26851)</a></td>
+    <td><a href="https://www.sparkfun.com/products/26784"><i>SparkFun Qwiic Power Switch<br />(PRT-26784)</i></a></td>
+    <td><a href="https://www.sparkfun.com/products/17047"><i>SparkFun Qwiic GPIO<br />(DEV-17047)</i></a></td>
+    <td><a href="https://www.sparkfun.com/products/14733"><i>SparkFun RGB Sensor - BH1749NUC<br />(SPX-14733)</i></a></td>
+    <td><a href="https://www.sparkfun.com/products/26851"><i>SparkFun Qwiic Directional Pad<br />(PRT-26851)</i></a></td>
+    <td><a href="https://www.sparkfun.com/sparkfun-qwiic-navigation-switch.html"><i>SparkFun Qwiic Navigational Switch<br />(PRT-27576)</i></a></td>
   </tr>
 </table>
 
@@ -46,6 +48,7 @@ Products That Use This Library
 * [DEV-17047](https://www.sparkfun.com/products/17047) - SparkFun Qwiic GPIO
 * [SPX-14733](https://www.sparkfun.com/products/14733) - SparkFun RGB Sensor - BH1749NUC
 * [PRT-26851](https://www.sparkfun.com/products/26851) - SparkFun Qwiic Directional Pad
+* [PRT-27576](https://www.sparkfun.com/sparkfun-qwiic-navigation-switch.html) - SparkFun Qwiic Navigational Switch
 
 License Information
 -------------------
