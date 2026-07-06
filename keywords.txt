@@ -23,6 +23,7 @@ setDebugStream	KEYWORD2
 invert	KEYWORD2
 revert	KEYWORD2
 getInputRegister	KEYWORD2
+readAll	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

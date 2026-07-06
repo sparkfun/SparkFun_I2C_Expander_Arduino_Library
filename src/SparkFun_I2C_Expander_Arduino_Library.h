@@ -168,6 +168,9 @@ public:
   PCA95XX_error_t digitalRead(uint8_t *destination, uint8_t pin);
   uint8_t digitalRead(uint8_t pin); // May return erroneous data if read fails
 
+  PCA95XX_error_t readAll(uint8_t *destination); // Read all input pins
+  uint8_t readAll();                             // Returns bitmask of all pins
+
   // invert and revert can be used to invert (or not) the I/O logic during a read
   PCA95XX_error_t invert(uint8_t pin, PCA95XX_invert_t inversion = PCA95XX_INVERT);
   PCA95XX_error_t revert(uint8_t pin);

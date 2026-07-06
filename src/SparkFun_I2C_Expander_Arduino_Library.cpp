@@ -296,6 +296,23 @@ uint8_t SFE_PCA95XX::digitalRead(uint8_t pin)
     return 0; // Unsafe
 }
 
+// Safe reading of all input pins
+PCA95XX_error_t SFE_PCA95XX::readAll(uint8_t *destination)
+{
+    return getInputRegister(destination);
+}
+
+// Unsafe overload
+uint8_t SFE_PCA95XX::readAll()
+{
+    uint8_t value;
+
+    if (readAll(&value) == PCA95XX_ERROR_SUCCESS)
+        return value;
+
+    return 0; // Unsafe
+}
+
 PCA95XX_error_t SFE_PCA95XX::invert(uint8_t pin, PCA95XX_invert_t inversion)
 {
     PCA95XX_error_t err;
