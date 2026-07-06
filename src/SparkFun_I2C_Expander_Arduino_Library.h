@@ -171,6 +171,12 @@ class SFE_PCA95XX
     PCA95XX_error_t readAll(uint8_t *destination); // Read all input pins
     uint8_t readAll();                             // Returns bitmask of all pins
 
+    // read first 8 pins and store to destination
+    PCA95XX_error_t read8(uint8_t *destination);
+
+    // read first 16 pins (available on 16-bit devices only)
+    PCA95XX_error_t read16(uint16_t *destination);
+
     // invert and revert can be used to invert (or not) the I/O logic during a read
     PCA95XX_error_t invert(uint8_t pin, PCA95XX_invert_t inversion = PCA95XX_INVERT);
     PCA95XX_error_t revert(uint8_t pin);

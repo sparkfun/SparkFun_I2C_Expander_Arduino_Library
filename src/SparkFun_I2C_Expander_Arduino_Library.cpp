@@ -299,7 +299,7 @@ uint8_t SFE_PCA95XX::digitalRead(uint8_t pin)
 // Safe reading of all input pins
 PCA95XX_error_t SFE_PCA95XX::readAll(uint8_t *destination)
 {
-    return getInputRegister(destination);
+    return read8(destination);
 }
 
 // Unsafe overload
@@ -313,6 +313,42 @@ uint8_t SFE_PCA95XX::readAll()
     return 0; // Unsafe
 }
 
+// read first 8 pins and store to destination
+PCA95XX_error_t SFE_PCA95XX::read8(uint8_t *destination)
+{
+    uint8_t registerAddress = PCA95XX_REGISTER_INPUT_PORT; // 0x00 to 0x03
+
+    // On 16-bit devices, input port, output port, polarity, and config registers all have two bytes.
+    if (_deviceType == PCA95XX_PCA9555)
+    {
+        registerAddress *= 2;
+    }
+    return readI2CRegister(destination, (PCA95XX_REGISTER_t)registerAddress);
+}
+
+// read first 16 pins (available on 16-bit devices only)
+PCA95XX_error_t SFE_PCA95XX::read16(uint16_t *destination)
+{
+    if (_deviceType != PCA95XX_PCA9555)
+    {
+        // Read first 8 bits only
+        uint8_t destU8 = 0;
+        PCA95XX_error_t err = read8(&destU8);
+        *destination = destU8;
+        return err;
+    }
+
+    uint8_t bytes[2] = {0, 0};
+    PCA95XX_error_t err = readI2CBuffer(bytes, (PCA95XX_REGISTER_t)(2 * PCA95XX_REGISTER_INPUT_PORT), 2);
+    if (err != PCA95XX_ERROR_SUCCESS)
+    {
+        return err;
+    }
+
+    // PCA9555 input port is read as low byte (port 0), then high byte (port 1)
+    *destination = ((uint16_t)bytes[1] << 8) | (uint16_t)bytes[0];
+    return PCA95XX_ERROR_SUCCESS;
+}
 PCA95XX_error_t SFE_PCA95XX::invert(uint8_t pin, PCA95XX_invert_t inversion)
 {
     PCA95XX_error_t err;
@@ -385,7 +421,7 @@ PCA95XX_error_t SFE_PCA95XX::writeI2CBuffer(uint8_t *src, PCA95XX_REGISTER_t sta
 {
     if (_deviceAddress == PCA95XX_ADDRESS_INVALID)
     {
-        PCA95XX_DEBUGLN(STORAGE("ERR (readI2CBuffer): Invalid address"));
+        PCA95XX_DEBUGLN(STORAGE("ERR (writeI2CBuffer): Invalid address"));
         return PCA95XX_ERROR_INVALID_ADDRESS;
     }
     _i2cPort->beginTransmission((uint8_t)_deviceAddress);
