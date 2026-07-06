@@ -167,7 +167,7 @@ public:
 
   PCA95XX_error_t digitalRead(uint8_t *destination, uint8_t pin);
   uint8_t digitalRead(uint8_t pin); // May return erroneous data if read fails
-// Add in public section:
+
   PCA95XX_error_t readAll(uint8_t *destination); // Read all input pins
   uint8_t readAll();                             // Returns bitmask of all pins
 
