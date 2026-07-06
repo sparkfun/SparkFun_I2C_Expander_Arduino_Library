@@ -34,15 +34,15 @@
 #include <SparkFun_I2C_Expander_Arduino_Library.h>
 
 #ifdef DEBUG_PCA95XX
-#define PCA95XX_DEBUG(x)      \
-    if (_debugPort != NULL)   \
-    {                         \
-        _debugPort->print(x); \
+#define PCA95XX_DEBUG(x)                                                                                               \
+    if (_debugPort != NULL)                                                                                            \
+    {                                                                                                                  \
+        _debugPort->print(x);                                                                                          \
     }
-#define PCA95XX_DEBUGLN(x)      \
-    if (_debugPort != NULL)     \
-    {                           \
-        _debugPort->println(x); \
+#define PCA95XX_DEBUGLN(x)                                                                                             \
+    if (_debugPort != NULL)                                                                                            \
+    {                                                                                                                  \
+        _debugPort->println(x);                                                                                        \
     }
 #define STORAGE(x) (x)
 #else
